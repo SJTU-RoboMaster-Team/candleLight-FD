@@ -1,0 +1,40 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "g474-debug",
+      "displayName": "STM32G474 Debug",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/cmake-build-debug-stm32",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/cmake/arm-none-eabi-gcc.cmake",
+        "BUILD_canable": "OFF",
+        "BUILD_canalyze": "OFF",
+        "BUILD_cannette": "OFF",
+        "BUILD_cantact": "OFF",
+        "BUILD_falcan": "OFF",
+        "BUILD_usb2can": "OFF",
+        "BUILD_CANable_MKS": "OFF",
+        "BUILD_CONVERTDEVICE_xCAN": "OFF",
+        "BUILD_DSD_TECH_SH_C30A": "OFF",
+        "BUILD_FYSETC_UCAN": "OFF",
+        "BUILD_can_module_com_classic": "OFF",
+        "BUILD_candleLight": "OFF",
+        "BUILD_STM32F4_DevBoard": "OFF",
+        "BUILD_CONVERTDEVICE_xCANFD": "OFF",
+        "BUILD_budgetcan": "OFF",
+        "BUILD_JiaoLoong_G4_3FDCAN": "ON"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "g474-debug",
+      "configurePreset": "g474-debug",
+      "targets": [
+        "JiaoLoong_G4_3FDCAN_fw"
+      ]
+    }
+  ]
+}

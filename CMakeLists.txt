@@ -24,6 +24,10 @@
 #
 
 cmake_minimum_required(VERSION 3.13)
+
+set(CMAKE_SYSTEM_NAME Generic)
+set(CMAKE_SYSTEM_PROCESSOR arm)
+
 project(candleLightFirmware C ASM)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -139,6 +143,7 @@ add_compile_options(
 set(CPUFLAGS_F0 -mcpu=cortex-m0)
 set(CPUFLAGS_F4 -mcpu=cortex-m4)
 set(CPUFLAGS_G0 -mcpu=cortex-m0)
+set(CPUFLAGS_G4 -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard)
 
 add_link_options(
 	-Wall
@@ -351,6 +356,16 @@ populate_ldscript(CPU_FAMILY STM32G0B1xx
 	HEAP_SIZE 1k
 )
 
+# TODO: 待硬件确定G4选型后再完善这个ldscript
+populate_ldscript(CPU_FAMILY STM32G474xx
+    FLASH_START 0x08000000
+    FLASH_SIZE 512k
+    RAM_START 0x20000000
+    RAM_SIZE 128k
+    STACK_SIZE 3k
+    HEAP_SIZE 1k
+)
+
 ######### commands for adding each target have a lot in common: make helper func.
 # one helper func per STM32 CPU family
 
@@ -413,6 +428,16 @@ function(add_g0b1_target TGTNAME)
 	target_link_libraries(${TGTNAME}_fw PRIVATE STM32_HAL_STM32G0B1xx STM32_USB_Device_Library_STM32G0B1xx)
 endfunction()
 
+function(add_g474_target TGTNAME)
+    add_target_common(${TGTNAME} STM32G474xx)
+    target_compile_definitions(${TGTNAME}_fw PRIVATE BOARD_${TGTNAME} STM32G4 CONFIG_M_CAN)
+    target_compile_options(${TGTNAME}_fw BEFORE PRIVATE ${CPUFLAGS_G4})
+    target_sources(${TGTNAME}_fw PRIVATE "src/device/device_g4.c")
+    target_sources(${TGTNAME}_fw PRIVATE "src/can/m_can.c")
+    target_link_options(${TGTNAME}_fw BEFORE PRIVATE ${CPUFLAGS_G4})
+    target_link_libraries(${TGTNAME}_fw PRIVATE STM32_HAL_STM32G474xx STM32_USB_Device_Library_STM32G474xx)
+endfunction()
+
 ########## generate list of targets.
 # the "_fw" part is appended automatically
 
@@ -438,6 +463,9 @@ set(TGTF407_LIST
 set(TGTG0B1_LIST
 	"CONVERTDEVICE_xCANFD"
 	"budgetcan"
+)
+set(TGTG474_LIST
+    "JiaoLoong_G4_3FDCAN"
 )
 
 foreach (TGTNAME IN LISTS TGTF042_LIST)
@@ -466,6 +494,13 @@ foreach (TGTNAME IN LISTS TGTG0B1_LIST)
 	if (BUILD_${TGTNAME})
 		add_g0b1_target(${TGTNAME})
 	endif()
+endforeach()
+
+foreach (TGTNAME IN LISTS TGTG474_LIST)
+    option(BUILD_${TGTNAME} "Build firmware for \"${TGTNAME}\" (default=yes)" ON)
+    if (BUILD_${TGTNAME})
+        add_g474_target(${TGTNAME})
+    endif()
 endforeach()
 
 message("*******************")
