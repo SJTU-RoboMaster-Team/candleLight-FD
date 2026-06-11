@@ -435,6 +435,59 @@ THE SOFTWARE.
 	#define TERM_Mode				 GPIO_MODE_OUTPUT_PP
 	#define TERM_Active_High		 1
 
+/*************** STM32G474 ***************/
+
+#elif defined(BOARD_JiaoLoong_G4_3FDCAN)
+#define USBD_PRODUCT_STRING_FS	    "JiaoLoong G4 3FDCAN"
+#define USB_MANUFACTURER_STRING     "JiaoLoong Technology"
+#define DFU_INTERFACE_STRING_FS	    "JiaoLoong G474CBT6 firmware upgrade interface"
+
+#define TIM2_CLOCK_SPEED		    64000000 // TODO
+
+#define FDCAN1_INTERFACE     		FDCAN1
+#define FDCAN2_INTERFACE            FDCAN2
+#define FDCAN3_INTERFACE            FDCAN3
+#define CAN_CLOCK_SPEED             40000000 // TODO
+#define NUM_CAN_CHANNEL			    3
+
+#define CONFIG_PHY                  1 // TODO
+#define CONFIG_PHY_SILENT           1 // TODO
+
+#define FDCAN1_Port                 GPIOA
+#define FDCAN1_TX                   GPIO_PIN_12
+#define FDCAN1_RX                   GPIO_PIN_11
+
+#define FDCAN2_Port                 GPIOB
+#define FDCAN2_TX                   GPIO_PIN_13
+#define FDCAN2_RX                   GPIO_PIN_12
+
+#define FDCAN3_Port                 GPIOA
+#define FDCAN3_TX                   GPIO_PIN_15
+#define FDCAN3_RX                   GPIO_PIN_8
+
+#define FDCAN_Active_High           0
+
+#define USB_DP_Port                 GPIOA
+#define USB_DP_Pin                  GPIO_PIN_12
+#define USB_DM_Port                 GPIOA
+#define USB_DM_Pin                  GPIO_PIN_11
+
+#define LEDRX_GPIO_Port             // TODO
+#define LEDRX_Pin                   // TODO
+#define LEDRX_Mode				    GPIO_MODE_OUTPUT_PP
+#define LEDRX_Active_High		    1
+
+#define LEDTX_GPIO_Port			    // TODO
+#define LEDTX_Pin				    // TODO
+#define LEDTX_Mode				    GPIO_MODE_OUTPUT_PP
+#define LEDTX_Active_High		    1
+
+#define CONFIG_TERMINATION          1
+#define TERM_GPIO_Port			    // TODO
+#define TERM_Pin                    // TODO
+#define TERM_MODE                   GPIO_MODE_OUTPUT_PP
+#define TERM_Active_High		    1
+
 #else
 	#error please define BOARD
 #endif
