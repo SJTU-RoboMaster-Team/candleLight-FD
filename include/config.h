@@ -447,47 +447,56 @@ THE SOFTWARE.
 #define FDCAN1_INTERFACE     		FDCAN1
 #define FDCAN2_INTERFACE            FDCAN2
 #define FDCAN3_INTERFACE            FDCAN3
-#define CAN_CLOCK_SPEED             40000000 // TODO
+#define CAN_CLOCK_SPEED             160000000 // FDCAN kernel clock: 160MHz
 #define NUM_CAN_CHANNEL			    3
+#define CONFIG_CANFD				1
 
 #define CONFIG_PHY                  1 // TODO
 #define CONFIG_PHY_SILENT           1 // TODO
 
-#define FDCAN1_Port                 GPIOA
-#define FDCAN1_TX                   GPIO_PIN_12
-#define FDCAN1_RX                   GPIO_PIN_11
+// FDCAN Configurations (Keep aligned with .ioc)
+#define FDCAN1_Port                 GPIOB
+#define FDCAN1_TX_Pin               GPIO_PIN_9
+#define FDCAN1_RX_Pin               GPIO_PIN_8
 
 #define FDCAN2_Port                 GPIOB
-#define FDCAN2_TX                   GPIO_PIN_13
-#define FDCAN2_RX                   GPIO_PIN_12
+#define FDCAN2_TX_Pin               GPIO_PIN_13
+#define FDCAN2_RX_Pin               GPIO_PIN_12
 
-#define FDCAN3_Port                 GPIOA
-#define FDCAN3_TX                   GPIO_PIN_15
-#define FDCAN3_RX                   GPIO_PIN_8
+#define FDCAN3_TX_Port              GPIOA
+#define FDCAN3_TX_Pin               GPIO_PIN_15
+#define FDCAN3_RX_Port              GPIOB
+#define FDCAN3_RX_Pin               GPIO_PIN_3
 
-#define FDCAN_Active_High           0
-
+// USB Configurations (Keep aligned with .ioc)
 #define USB_DP_Port                 GPIOA
 #define USB_DP_Pin                  GPIO_PIN_12
 #define USB_DM_Port                 GPIOA
 #define USB_DM_Pin                  GPIO_PIN_11
 
-#define LEDRX_GPIO_Port             // TODO
-#define LEDRX_Pin                   // TODO
-#define LEDRX_Mode				    GPIO_MODE_OUTPUT_PP
-#define LEDRX_Active_High		    1
+// LED Configurations (Keep aligned with .ioc)
+#define LED_FDCAN1_TX_Port          GPIOA
+#define LED_FDCAN1_TX_Pin           GPIO_PIN_0
+#define LED_FDCAN1_RX_Port          GPIOA
+#define LED_FDCAN1_RX_Pin           GPIO_PIN_1
 
-#define LEDTX_GPIO_Port			    // TODO
-#define LEDTX_Pin				    // TODO
-#define LEDTX_Mode				    GPIO_MODE_OUTPUT_PP
+#define LED_FDCAN2_TX_Port          GPIOA
+#define LED_FDCAN2_TX_Pin           GPIO_PIN_2
+#define LED_FDCAN2_RX_Port          GPIOA
+#define LED_FDCAN2_RX_Pin           GPIO_PIN_3
+
+#define LED_FDCAN3_TX_Port          GPIOA
+#define LED_FDCAN3_TX_Pin           GPIO_PIN_4
+#define LED_FDCAN3_RX_Port          GPIOA
+#define LED_FDCAN3_RX_Pin           GPIO_PIN_5
+
+#define LEDRX_Mode				    GPIO_MODE_OUTPUT_OD
+#define LEDRX_Active_High		    1
+#define LEDTX_Mode				    GPIO_MODE_OUTPUT_OD
 #define LEDTX_Active_High		    1
 
-#define CONFIG_TERMINATION          1
-#define TERM_GPIO_Port			    // TODO
-#define TERM_Pin                    // TODO
-#define TERM_MODE                   GPIO_MODE_OUTPUT_PP
-#define TERM_Active_High		    1
-
+// Forbid the termination 120 Ohm resistor control for now
+#define CONFIG_TERMINATION		    0
 #else
 	#error please define BOARD
 #endif
