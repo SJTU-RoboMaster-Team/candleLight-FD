@@ -439,10 +439,12 @@ THE SOFTWARE.
 
 #elif defined(BOARD_JiaoLoong_G4_3FDCAN)
 #define USBD_PRODUCT_STRING_FS	    "JiaoLoong G4 3FDCAN"
-#define USB_MANUFACTURER_STRING     "JiaoLoong Technology"
+#define USBD_MANUFACTURER_STRING     "JiaoLoong Technology"
 #define DFU_INTERFACE_STRING_FS	    "JiaoLoong G474CBT6 firmware upgrade interface"
 
-#define TIM2_CLOCK_SPEED		    64000000 // TODO
+// Clock Speed (HSE Frequency: 16MHz | HCLK Frequency: 160 MHz)
+#define TIM2_CLOCK_SPEED		    160000000
+#define CONFIG_HSE_OSC_SPEED        16000000
 
 #define FDCAN1_INTERFACE     		FDCAN1
 #define FDCAN2_INTERFACE            FDCAN2
@@ -450,9 +452,6 @@ THE SOFTWARE.
 #define CAN_CLOCK_SPEED             160000000 // FDCAN kernel clock: 160MHz
 #define NUM_CAN_CHANNEL			    3
 #define CONFIG_CANFD				1
-
-#define CONFIG_PHY                  1 // TODO
-#define CONFIG_PHY_SILENT           1 // TODO
 
 // FDCAN Configurations (Keep aligned with .ioc)
 #define FDCAN1_Port                 GPIOB
@@ -495,8 +494,8 @@ THE SOFTWARE.
 #define LEDTX_Mode				    GPIO_MODE_OUTPUT_OD
 #define LEDTX_Active_High		    1
 
-// Forbid the termination 120 Ohm resistor control for now
-#define CONFIG_TERMINATION		    0
+// Forbid the termination 120 Ohm resistor control (CONFIG_TERMINATION)
+// Forbid the CAN transceiver low-power control (CONFIG_PHY)
 #else
 	#error please define BOARD
 #endif
