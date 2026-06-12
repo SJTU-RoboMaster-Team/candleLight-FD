@@ -17,3 +17,8 @@
 compile_commands.json
 /arm-gcc-toolchain.cmake
 /CMakeUserPresets.json
+
+# CubeMX reference project: keep only the .ioc hardware configuration.
+/mcu/stm32g474/*
+!/mcu/stm32g474/
+!/mcu/stm32g474/*.ioc
