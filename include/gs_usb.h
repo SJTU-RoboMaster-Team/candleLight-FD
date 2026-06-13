@@ -211,7 +211,11 @@ enum gs_can_termination_state {
 };
 
 enum gs_device_filter_dev {
+#ifdef CONFIG_BXCAN_
 	GS_DEVICE_FILTER_DEV_BXCAN = 1,         // bxcan, 14 filters
+#elif CONFIG_FDCAN
+    GS_DEVICE_FILTER_DEV_FDCAN = 1,         // fdcann, TODO
+#endif
 };
 
 /* data types passed between host and device */
@@ -293,6 +297,7 @@ struct gs_device_filter_info {
 	u8 reserved[3];
 }  __packed __aligned(4);
 
+#ifdef CONFIG_BXCAN
 struct gs_device_filter_bxcan {
 	u32 fs1r;
 	u32 fm1r;
@@ -301,11 +306,26 @@ struct gs_device_filter_bxcan {
 	u32 fr1[14];
 	u32 fr2[14];
 } __packed __aligned(4);
+#elif CONFIG_FDCAN
+struct gs_device_filter_fdcan {
+	u32 fs1r;
+	u32 fm1r;
+	u32 ffa1r;
+	u32 fa1r;
+	u32 fr1[14];
+	u32 fr2[14];
+} __packed __aligned(4);
+#endif
+
 
 struct gs_device_filter {
 	struct gs_device_filter_info info;
 	union {
+#ifdef CONFIG_BXCAN
 		struct gs_device_filter_bxcan bxcan;
+#elif CONFIG_FDCAN
+	    struct gs_device_filter_fdcan fdcan;
+#endif
 	};
 } __packed __aligned(4);
 

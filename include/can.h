@@ -37,6 +37,8 @@
 typedef struct {
 #if defined (CONFIG_BXCAN)
 	CAN_TypeDef *instance;
+#elif defined(CONFIG_FDCAN)
+    FDCAN_HandleTypeDef *instance;
 #endif
 	struct list_head list_from_host;
 	led_data_t leds;
@@ -45,6 +47,9 @@ typedef struct {
 #if defined (CONFIG_BXCAN)
 	struct gs_device_filter filter;
 	uint32_t btr;
+#elif defined (CONFIG_FDCAN)
+    struct gs_device_filter filter;
+    uint32_t btr;
 #endif
 #if (NUM_CAN_CHANNEL > 1)
 	uint8_t nr;

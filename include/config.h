@@ -451,7 +451,7 @@ THE SOFTWARE.
 #define FDCAN3_INTERFACE            FDCAN3
 #define CAN_CLOCK_SPEED             160000000 // FDCAN kernel clock: 160MHz
 #define NUM_CAN_CHANNEL			    3
-#define CONFIG_CANFD				1
+#define CONFIG_FDCAN				1
 
 // FDCAN Configurations (Keep aligned with .ioc)
 #define FDCAN1_Port                 GPIOB
@@ -474,20 +474,18 @@ THE SOFTWARE.
 #define USB_DM_Pin                  GPIO_PIN_11
 
 // LED Configurations (Keep aligned with .ioc)
-#define LED_FDCAN1_TX_Port          GPIOA
-#define LED_FDCAN1_TX_Pin           GPIO_PIN_0
-#define LED_FDCAN1_RX_Port          GPIOA
-#define LED_FDCAN1_RX_Pin           GPIO_PIN_1
-
-#define LED_FDCAN2_TX_Port          GPIOA
-#define LED_FDCAN2_TX_Pin           GPIO_PIN_2
-#define LED_FDCAN2_RX_Port          GPIOA
-#define LED_FDCAN2_RX_Pin           GPIO_PIN_3
-
-#define LED_FDCAN3_TX_Port          GPIOA
-#define LED_FDCAN3_TX_Pin           GPIO_PIN_4
-#define LED_FDCAN3_RX_Port          GPIOA
-#define LED_FDCAN3_RX_Pin           GPIO_PIN_5
+#define LED_CAN1TX_Pin GPIO_PIN_0
+#define LED_CAN1TX_GPIO_Port GPIOA
+#define LED_CAN1RX_Pin GPIO_PIN_1
+#define LED_CAN1RX_GPIO_Port GPIOA
+#define LED_CAN2TX_Pin GPIO_PIN_2
+#define LED_CAN2TX_GPIO_Port GPIOA
+#define LED_CAN2RX_Pin GPIO_PIN_3
+#define LED_CAN2RX_GPIO_Port GPIOA
+#define LED_CAN3TX_Pin GPIO_PIN_4
+#define LED_CAN3TX_GPIO_Port GPIOA
+#define LED_CAN3RX_Pin GPIO_PIN_5
+#define LED_CAN3RX_GPIO_Port GPIOA
 
 #define LEDRX_Mode				    GPIO_MODE_OUTPUT_OD
 #define LEDRX_Active_High		    1

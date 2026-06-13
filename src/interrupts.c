@@ -27,6 +27,12 @@ THE SOFTWARE.
 #include <stdint.h>
 #include "hal_include.h"
 
+void Error_Handler(void) {
+    __disable_irq();
+    while (1) {
+    }
+}
+
 void NMI_Handler(void)
 {
 	__asm__ ("BKPT");

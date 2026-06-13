@@ -82,11 +82,13 @@ static inline void gpio_init_term(void)
 // must run before can_init
 void gpio_init(void)
 {
-	GPIO_InitTypeDef GPIO_InitStruct;
+	GPIO_InitTypeDef GPIO_InitStruct = {0};
 
+    /* GPIO Ports Clock */
+    __HAL_RCC_GPIOF_CLK_ENABLE();
 	__HAL_RCC_GPIOA_CLK_ENABLE();
 	__HAL_RCC_GPIOB_CLK_ENABLE();
-	__HAL_RCC_GPIOC_CLK_ENABLE();
+    __HAL_RCC_GPIOC_CLK_ENABLE();
 #if defined(STM32F4)
 	__HAL_RCC_GPIOD_CLK_ENABLE();
 #endif
@@ -156,5 +158,20 @@ void gpio_init(void)
 	HAL_GPIO_Init(USB_GPIO_Port, &GPIO_InitStruct);
 #endif
 
-	gpio_init_term();
+#ifdef BOARD_JiaoLoong_G4_3FDCAN
+    /*Configure GPIO pin Output Level */
+    HAL_GPIO_WritePin(GPIOA, LED_CAN1TX_Pin | LED_CAN1RX_Pin | LED_CAN2TX_Pin | LED_CAN2RX_Pin
+                      | LED_CAN3TX_Pin | LED_CAN3RX_Pin, GPIO_PIN_RESET);
+
+    /*Configure GPIO pins : LED_CAN1TX_Pin LED_CAN1RX_Pin LED_CAN2TX_Pin LED_CAN2RX_Pin
+                             LED_CAN3TX_Pin LED_CAN3RX_Pin */
+    GPIO_InitStruct.Pin = LED_CAN1TX_Pin | LED_CAN1RX_Pin | LED_CAN2TX_Pin | LED_CAN2RX_Pin
+        | LED_CAN3TX_Pin | LED_CAN3RX_Pin;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+#endif
+
+    gpio_init_term();
 }
