@@ -39,6 +39,12 @@ struct board_channel_config {
 #elif defined(CONFIG_FDCAN)
     FDCAN_HandleTypeDef *interface;
 #endif
+    GPIO_TypeDef *led_rx_port;
+    uint16_t led_rx_pin;
+    uint8_t led_rx_active_high;
+    GPIO_TypeDef *led_tx_port;
+    uint16_t led_tx_pin;
+    uint8_t led_tx_active_high;
 };
 
 struct board_config {

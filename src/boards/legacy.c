@@ -82,18 +82,42 @@ static void __maybe_unused legacy_termination_set(can_data_t *channel,
 
 const struct board_config config = {
 #ifdef CONFIG_FDCAN
-	.channel[0] = {
-		.interface = &hfdcan1,
-	},
-	.channel[1] = {
-		.interface = &hfdcan2,
-	},
-	.channel[2] = {
-		.interface = &hfdcan3,
-	},
+    .channel[0] = {
+        .interface = &hfdcan1,
+        .led_tx_port = LED_CAN1TX_GPIO_Port,
+        .led_tx_pin = LED_CAN1TX_Pin,
+        .led_tx_active_high = 1,
+        .led_rx_port = LED_CAN1RX_GPIO_Port,
+        .led_rx_pin = LED_CAN1RX_Pin,
+        .led_rx_active_high = 1,
+    },
+    .channel[1] = {
+        .interface = &hfdcan2,
+        .led_tx_port = LED_CAN2TX_GPIO_Port,
+        .led_tx_pin = LED_CAN2TX_Pin,
+        .led_tx_active_high = 1,
+        .led_rx_port = LED_CAN2RX_GPIO_Port,
+        .led_rx_pin = LED_CAN2RX_Pin,
+        .led_rx_active_high = 1,
+    },
+    .channel[2] = {
+        .interface = &hfdcan3,
+        .led_tx_port = LED_CAN3TX_GPIO_Port,
+        .led_tx_pin = LED_CAN3TX_Pin,
+        .led_tx_active_high = 1,
+        .led_rx_port = LED_CAN3RX_GPIO_Port,
+        .led_rx_pin = LED_CAN3RX_Pin,
+        .led_rx_active_high = 1,
+    },
 #else
 	.channel[0] = {
 		.interface = CAN_INTERFACE,
+        .led_tx_port = LEDTX_GPIO_Port,
+        .led_tx_pin = LEDTX_Pin,
+        .led_tx_active_high = 1,
+        .led_rx_port = LEDRX_GPIO_Port,
+        .led_rx_pin = LEDRX_Pin,
+        .led_rx_active_high = 1,
 	},
 #endif
 	SET_PHY_POWER_FN(legacy_phy_power_set)
