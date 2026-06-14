@@ -452,6 +452,7 @@ THE SOFTWARE.
 #define CAN_CLOCK_SPEED             160000000 // FDCAN kernel clock: 160MHz
 #define NUM_CAN_CHANNEL			    3
 #define CONFIG_FDCAN				1
+#define CONFIG_CANFD				1
 
 // FDCAN Configurations (Keep aligned with .ioc)
 #define FDCAN1_Port                 GPIOB
@@ -487,8 +488,12 @@ THE SOFTWARE.
 #define LED_CAN3RX_Pin GPIO_PIN_5
 #define LED_CAN3RX_GPIO_Port GPIOA
 
+#define LEDRX_GPIO_Port            LED_CAN1RX_GPIO_Port
+#define LEDRX_Pin                  LED_CAN1RX_Pin
 #define LEDRX_Mode				    GPIO_MODE_OUTPUT_OD
 #define LEDRX_Active_High		    1
+#define LEDTX_GPIO_Port            LED_CAN1TX_GPIO_Port
+#define LEDTX_Pin                  LED_CAN1TX_Pin
 #define LEDTX_Mode				    GPIO_MODE_OUTPUT_OD
 #define LEDTX_Active_High		    1
 

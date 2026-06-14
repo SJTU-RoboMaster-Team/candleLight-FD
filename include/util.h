@@ -29,6 +29,9 @@ THE SOFTWARE.
 #include <stdint.h>
 #include <stdbool.h>
 #include <cmsis_device.h>
+#if defined(STM32G4)
+#include <stm32g4xx.h>
+#endif
 
 void hex32(char *out, uint32_t val);
 

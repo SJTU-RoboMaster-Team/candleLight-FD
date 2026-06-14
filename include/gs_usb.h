@@ -307,6 +307,7 @@ struct gs_device_filter_bxcan {
 	u32 fr2[14];
 } __packed __aligned(4);
 #elif CONFIG_FDCAN
+// TODO: 确定FDCAN的Filter
 struct gs_device_filter_fdcan {
 	u32 fs1r;
 	u32 fm1r;

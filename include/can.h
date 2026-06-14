@@ -65,7 +65,7 @@ struct board_channel_config;
 void can_init(can_data_t *channel, const struct board_channel_config *config);
 void can_set_bittiming(can_data_t *channel, const struct gs_device_bittiming *timing);
 
-#ifdef CONFIG_CANFD
+#ifdef CONFIG_FDCAN
 void can_set_data_bittiming(can_data_t *channel, const struct gs_device_bittiming *timing);
 #else
 static inline bool can_set_data_bittiming(can_data_t *channel,

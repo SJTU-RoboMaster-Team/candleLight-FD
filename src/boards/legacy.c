@@ -34,6 +34,20 @@
 #include "gpio.h"
 #include "usbd_gs_can.h"
 
+#ifdef CONFIG_FDCAN
+static FDCAN_HandleTypeDef hfdcan1 = {
+	.Instance = FDCAN1,
+};
+
+static FDCAN_HandleTypeDef hfdcan2 = {
+	.Instance = FDCAN2,
+};
+
+static FDCAN_HandleTypeDef hfdcan3 = {
+	.Instance = FDCAN3,
+};
+#endif
+
 static void __maybe_unused legacy_phy_power_set(can_data_t *channel, bool enable)
 {
 	UNUSED(channel);
@@ -67,9 +81,21 @@ static void __maybe_unused legacy_termination_set(can_data_t *channel,
 }
 
 const struct board_config config = {
+#ifdef CONFIG_FDCAN
+	.channel[0] = {
+		.interface = &hfdcan1,
+	},
+	.channel[1] = {
+		.interface = &hfdcan2,
+	},
+	.channel[2] = {
+		.interface = &hfdcan3,
+	},
+#else
 	.channel[0] = {
 		.interface = CAN_INTERFACE,
 	},
+#endif
 	SET_PHY_POWER_FN(legacy_phy_power_set)
 	SET_TERMINATION_FN(legacy_termination_set)
 };
